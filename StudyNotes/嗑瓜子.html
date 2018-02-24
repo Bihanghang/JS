@@ -4,15 +4,16 @@
 	<title>Study Notes</title>
 	<style type="text/css">
 		*{padding: 0px; margin: 0px; } 
-		.fixed{width: 100%; height: 60px; background: blue; }
-		.top_1{width: 200px; height: 60px;}
-		.ke{color: yellow; font-size: 24px; }
+		.fixed{width: 100%; height: 48px; background: rgb(52,139,232); }
+		.top_1{width: 200px; height: 48px;}
 		.dropdown{display: none; } 
 		li{list-style-type: none;}
-		.navigator:hover .dropdown {display: block; } .navigator a{color: white; text-decoration: none;} 
-			h1{font-size: 18px; line-height: 60px; }
-	    .dropdown li{background: blue; border: solid 1px white; height: 32px; font-size: 12px;} 
-	    .dropdown li:hover {background-color: red;}
+		.navigator:hover .dropdown {display: block; } .navigator a{color: white; text-decoration: none; } 
+			h1{font-size: 16px; line-height: 48px; text-indent: 20px; } 
+	    .dropdown li{background: rgb(64,150,238); border: 0.1px solid rgb(52,139,232); height: 32px; font-size: 15px; text-indent: 20px;} 
+	    .dropdown li a{display: block; line-height: 23px; margin-top: 8px;}
+	    .dropdown li a:hover {background-color: rgb(53,106,160); }
+	    .dot-bottom {font-size:20px; line-height: 0px; border-width: 5px; border-color: white; border-bottom-width: 0; border-style: dashed; border-top-style: solid; border-left-color: transparent; border-right-color: transparent; display:inline-block; margin-bottom: 4px;//margin-bottom可以用其他的却不能用。 } 
 	</style>
 </head>
 <body>
@@ -21,22 +22,22 @@
 		<ul>
 		<!-- Title Area -->
 			<li class="navigator">
-				<h1><a href="#">&nbsp;&nbsp;学习笔记JavaWeb</a></h1>
+				<h1><a href="#">学习笔记JavaWeb&nbsp;&nbsp;&nbsp;<span class="dot-bottom"></span></a></h1>
 				<ul class="dropdown">
 			
-				<li><a href="#introduction">&nbsp;&nbsp;1.日期转换</a></li>
+				<li><a href="日期转换.html">1.日期转换</a></li>
 			
-				<li><a href="#grammar">&nbsp;&nbsp;2.</a></li>
+				<li><a href="#grammar">2.</a></li>
 			
-				<li><a href="#stdlib">&nbsp;&nbsp;3.</a></li>
+				<li><a href="#stdlib">3.</a></li>
 			
-				<li><a href="#oop">&nbsp;&nbsp;4.</a></li>
+				<li><a href="#oop">4.</a></li>
 			
-				<li><a href="#advanced">&nbsp;&nbsp;5.</a></li>
+				<li><a href="#advanced">5.</a></li>
 			
-				<li><a href="#dom">&nbsp;&nbsp;6.</a></li>
+				<li><a href="#dom">6.</a></li>
 			
-				<li><a href="#bom">&nbsp;&nbsp;7.</a></li>
+				<li><a href="#bom">7.</a></li>
 			
 				</ul>
 			</li>
