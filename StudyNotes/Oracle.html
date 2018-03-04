@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>日期</title>
+	<title>Oracle</title>
 	<style type="text/css">
 		*{padding: 0px; margin: 0px; }
 		.first{width: 1000px; height:245px; margin: auto; background: black; }
@@ -14,14 +14,13 @@
 </head>
 <body>
 	<br>
-	<h1 class="titposi">1.日期</h1>
+	<h1 class="titposi">1.Oracle基本语句</h1>
 	<hr class="hrstyle">
 	<br>
 	<div class="first">
 		<br>
-		<p class="white"> //字符串转化为sqlDate类型</p>
-		<p class="white"> java.sql.Date date=java.sql.Date.valueOf("2005-06-08"); <a href="http://blog.sina.com.cn/s/blog_4f925fc30102e6s7.html" class="linkstyle blue">详细介绍地址</a></p>
-		<br>
+		<p class="white"> //删除</p>
+		<p class="white"> delete from attendance where impid='123' and  ATTENDTIME = to_date('"+time+"','yyyy-mm-dd')</p>
 		<p class="white">//获取某年某月天数</p>
 		<p class="white">String date = "2018-02-12";</p>
 		<p class="white">SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");</p>

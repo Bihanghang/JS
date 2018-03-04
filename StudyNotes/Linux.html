@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Linux</title>
+	<style type="text/css">
+		*{padding: 0px; margin: 0px; }
+		.first{width: 1000px; height:245px; margin: auto; background: black; }
+		.titposi{margin-left: 183px; }
+		.white{color: white; text-indent: 20px;} 
+		.blue{color: blue;}
+		.hrstyle{height:1px;border:none;border-top:1px dashed #0066CC; width: 1000px; margin-left: 183px;}
+		.linkstyle{text-decoration: none; text-indent: 10px; display: inline-block; }
+	</style>
+</head>
+<body>
+	<br>
+	<h1 class="titposi">Linux</h1>
+	<hr class="hrstyle">
+	<br>
+	<div class="first">
+		<p class="white"> 122.152.207.204</p>
+		<br>
+		<p class="white"> Q:ORA-12705: Cannot access NLS data files or invalid environment specified .</p>
+		<p class="white"> S:export NLS_LANG=AMERICAN_AMERICA.AL32UTF8</p>
+		<p class="white"> &nbsp;&nbsp;&nbsp;export ORA_NLS10=/usr/oracle/product/11.2.0/db_1/nls/data</p>
+		<br>
+		<p class="white">//登陆</p>
+		<p class="white">sqlplus / as sysdba</p>
+		<br>
+		<p class="white">Q:out of memory</p>
+		<p class="white">S:echo 1 > /proc/sys/vm/drop_caches</p>
+	</div>
+	<br>
+	<br>
+	<div class="first">
+		<p class="white"> //url</p>
+		<p class="white"> jdbc:oracle:thin:localhost:1521:orcl</p>
+		<br>
+		<p class="white"> //查看字符</p>
+		<p class="white"> env |grep LANG</p>
+		<br>
+		<p class="white"> Q:The Network Adapter could not establish the connection</p>
+		<p class="white"> S:lsnrctl start</p>
+	</div>
+	<br>
+	<br>
+	<div class="first">
+		<p class="white"> //linux下实时查看tomcat运行日志</p>
+		<p class="white"> 1、先切换到：cd usr/local/tomcat5/logs</p>
+		<p class="white"> 2、tail -f catalina.out</p>
+		<p class="white"> Ctrl+c 是退出tail命令。alt+E+R重置。</p>
+	</div>
+</body>
+</html>
