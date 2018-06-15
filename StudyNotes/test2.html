@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.box{width: 600px;margin: auto; margin-top: 10%;}
+		.box1{width: 300px;float: left;}
+		.box2{width: 300px;float: right;}
+		#pic{ width: 200px; margin-top: 50px;display: none;}
+		span{width: 100px;text-align: center;font-size: 19px;color: yellow;}
+		button{width: 100px;text-align: center;font-size: 19px;color: black;margin-left: 53%;margin-top: 1px;}
+		#word{cursor: pointer; } 
+		input{width: 60%;margin-left: 115px; margin-top: 150px;}
+	</style>
+</head>
+<body>
+	<form id="hrlogin" name="hrlogin" action="loginServlet" method="post">
+	<div class="box">
+		<div class="box1">
+			<input type="password" value="password">
+			<br>
+			<button id="button">denglu</button>
+		</div>
+		<div class="box2">
+			<img src="zhq.jpg" id="pic">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<span id="word" onclick="word()">&nbsp;密码提示</span>
+		</div>
+	</div>
+	</form>
+	<script>
+		
+	var word = function(){
+  		$("#word").fadeOut(1000)
+  		setTimeout('pic()',1000)
+  	}
+  		
+  	var pic = function(){
+  		$("#pic").fadeIn(2000)
+  	}
+
+</script>
+</body>
+</html>

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Calendar</title>
+<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
 <style type="text/css">
 body{background:#f2f2f2; margin:40px; }
 li{cursor: pointer; }
-*{margin:0; padding:0;}
-.wide{width: 100%; height: 100%;}
-.BBox{width: 550px; height: 351px; }
+*{margin:0; padding:0; }
+.BBox{width: 550px; height: 351px; margin-left:360px; margin-top:50px; }
 .Select{width: 98px; height: 351px; float: right; }
 .box1{width:98px; height: 117px; }
 #box1-box{width: 60px; height: 36px; background: red; position: relative; top: 36px; left: 18px }
@@ -23,15 +23,22 @@ li{cursor: pointer; }
 #prev{text-indent:-9999px; position:absolute; left:0; top:0; width:60px; height:70px; background:url(prev.png) no-repeat 50% 50%; }
 #next{text-indent:-9999px; position:absolute; right:0; top:0; width:60px; height:70px; background:url(next.png) no-repeat 50% 50%; }
 .body{padding:auto;}
-.body-list ul{width:450px; font-family:arial; font-weight:bold; font-size:14px; }
+.body-list ul{width:450px; font-family:arial; font-weight:bold; font-size:14px;}
 .body-list ul li{width:64.26px; height:36px; line-height:36px; list-style-type:none; display:block; box-sizing:border-box; float:left; text-align:center; }
 .lightgrey{color:#a8a8a8; } .darkgrey{color:#565656; } .green{color:#6ac13c; } .background{background: '#FFFFFF' }
-.greenbox{border:1px solid #6ac13c; background:#e9f8df; }
-.blue{background: blue}
+.greenbox{border:1px solid black; background:white; }
+.blue{background: blue} .red{background: red} .yellow{background: yellow }
+.top{width:100%;}
+.one{text-indent: 560px; color: blue; font-size: 25px;}
+.two{text-indent: 600px; color: black; font-size: 10px;}
 </style>
 </head>
 
 <body>
+	<div class="top">
+	<p class="one">撸管日历</p>
+	<p class="two" id="num"></p>
+	</div>
 <div class="BBox">
 <div class="calendar">
   <div class="title">
@@ -90,13 +97,13 @@ var cyear = document.getElementById("calendar-year");
 var my_date = new Date();
 var my_year = my_date.getFullYear();
 var my_month = my_date.getMonth();
-
-log(my_month)
 var my_day = my_date.getDate();
 var box1_box = document.getElementById("box1-box")
 var box2_box = document.getElementById("box2-box")
 var box3_box = document.getElementById("box3-box")
 var FirstBox = false, SecondBox = false, ThirdBox = false;
+var num = document.getElementById("num");
+var signMonth = new Array();
 box1_box.onclick = function() {
 	FirstBox = true
 	SecondBox = false
@@ -122,7 +129,7 @@ prev.onclick = function(e){
 		my_year--;
 		my_month = 11;
 	}
-	refreshDate();
+	qiandao()
 }
 next.onclick = function(e){
 	e.preventDefault();
@@ -131,17 +138,49 @@ next.onclick = function(e){
 		my_year++;
 		my_month = 0;
 	}
-	refreshDate();
+	qiandao()
 }
+
+var qiandao = function(){  
+	  $.getJSON("getAttend.do",
+			  {
+		  		month:my_month+1,
+		  		year: my_year,
+		  		day:my_day,
+			  },
+			  function(data){
+				  signMonth = data;
+				  refreshDate()
+	     }); 
+} 
+var ifHasSigned = function(signList,day){  
+    var signed = 0;  
+    $.each(signList,function(index,item){  
+     if(item.signDay == day) {  
+      signed = item.status;
+      return signed;  
+     }  
+    });  
+    return signed ;  
+   }
+   
 function refreshDate(){
 	var str = "";
 	var totalDay = daysMonth(my_month, my_year); //获取该月总天数
 	var firstDay = dayStart(my_month, my_year); //获取该月第一天是星期几
-	
 	var myclass;
-	var qiandao;
+	var qianbg;
+	var totalnum = 0;
+	for (var i = 0; i < signMonth.length; i++) {
+		totalnum+=parseInt(signMonth[i].status)
+	}
+	num.innerHTML=totalnum;
 	for(var i=1; i<firstDay; i++){ 
 		str += "<li></li>"; //为起始日之前的日期创建空白节点
+	}
+	if(firstDay == 0){
+		for(var i=1;i<7; i++)
+		str += "<li></li>";
 	}
 	for(var i=1; i<=totalDay; i++){
 		if((i<my_day && my_year==my_date.getFullYear() && my_month==my_date.getMonth()) || my_year<my_date.getFullYear() || ( my_year==my_date.getFullYear() && my_month<my_date.getMonth())){ 
@@ -151,8 +190,16 @@ function refreshDate(){
 		}else{
 			myclass = "darkgrey"; //当该日期在今后之后时，以深灰字体显示
 		}
-		 
-		str += "<li class='"+myclass+" "+qiandao+"' onclick='g(this.id)' ondblclick='db(this.id)' id="+i+">"+i+"</li>"; //创建日期节点
+		if(ifHasSigned(signMonth,i) == 1){
+			qianbg = "red";
+		}else if(ifHasSigned(signMonth,i) == 2){
+			qianbg = "blue"
+		}else if(ifHasSigned(signMonth,i) == 3) {
+			qianbg = "yellow"
+		}else{
+			qianbg = ""
+		}
+		str += "<li class='"+myclass+" "+qianbg+"' onclick='g(this.id)' ondblclick='db(this.id)' id="+i+">"+i+"</li>"; //创建日期节点
 	}
 	holder.innerHTML = str; //设置日期显示
 	ctitle.innerHTML = month_name[my_month]; //设置英文月份显示
@@ -163,19 +210,51 @@ function dayStart(month, year) {
 	var tmpDate = new Date(year, month, 1);
 	return (tmpDate.getDay());
 }
+
+var take = function(x){
+	 $.post("insert.do",{
+    	 year:my_year,
+    	 month:my_month+1,
+		 day:x,
+		 status:type(),
+     });
+}
+
+var cancel = function(x){
+	 $.post("delete.do",{
+   	 	 year : my_year,
+   	 	month : my_month+1,
+	 	  day : x,
+    });
+}
+
+var type = function(){
+	if(FirstBox == true && SecondBox == false && ThirdBox == false){
+		return 1;
+	}else if(FirstBox == false && SecondBox == true && ThirdBox == false){
+		return 2;
+	}else if(FirstBox == false && SecondBox == false && ThirdBox == true){
+		return 3;
+	}else {
+		return 0;
+	}
+}
+
 function db(x) {
 	  var d=document.getElementsByTagName('li')
+	  cancel(x)
 	  for(p=d.length;p--;){
-      	 if(d[p].id!=x){;}
-         else{
-         	d[p].style.background=""
-         }
-      } 
-
+    	 if(d[p].id!=x){;}
+       else{
+       	d[p].style.background="white"
+       }
+ 	  } 
+	  qiandao()
 }
 
 function g(x) {
     var d=document.getElementsByTagName('li')
+    
     for(p=d.length;p--;){
       	 if(d[p].id!=x){;}
          else{
@@ -190,18 +269,21 @@ function g(x) {
          	}
          }
     } 
+    take(x)
+    qiandao()
 }
 
 //计算某年是不是闰年，通过求年份除以4的余数即可
 function daysMonth(month, year) {
-	var tmp = (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 
+	var tmp = year % 4;
 	if (tmp == 0) {
 		return (month_olympic[month]);
 	} else {
 		return (month_normal[month]);
 	}
 }
-refreshDate();
+
+qiandao();
 </script>
 </body>
 </html>

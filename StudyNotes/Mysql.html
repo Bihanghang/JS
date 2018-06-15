@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mysql</title>
+	<style type="text/css">
+		*{padding: 0px; margin: 0px; }
+		.first{width: 1000px; height:245px; margin: auto; background: black; }
+		.titposi{margin-left: 183px; }
+		.white{color: white; text-indent: 20px;} 
+		.blue{color: blue;}
+		.hrstyle{height:1px;border:none;border-top:1px dashed #0066CC; width: 1000px; margin-left: 183px;}
+		.linkstyle{text-decoration: none; text-indent: 10px; display: inline-block; }
+	</style>
+</head>
+<body>
+	<br>
+	<h1 class="titposi">1.Mysql基本语句</h1>
+	<hr class="hrstyle">
+	<br>
+	<div class="first">
+		<br>
+		<p class="white"> //删除</p>
+		<p class="white"> delete from attendance where impid='123'</p>
+		<p class="white"> //插入</p>
+		<p class="white"> insert into 表名 (name,datetime) values("名字","2011-04-15 12:22:25");</p>
+		<p class="white"> //修改字段类型</p>
+		<p class="white"> ALTER TABLE 表名 modify 字段名 类型; </p>
+		<p class="white"> //修改字段默认值语法</p>
+		<p class="white"> alter table 表名 alter column 字段名 drop default; (若本身存在默认值，则先删除) </p>
+		<p class="white"> alter table 表名 alter column 字段名 set default 默认值;(若本身不存在则可以直接设定) </p>
+	</div>
+	<br>
+	<div class="first">
+		<br>
+		<p class="white"> //更新</p>
+		<p class="white"> UPDATE 表名 SET 字段名=内容 WHERE runoob_id=3;</p>
+		<p class="white"> //添加字段</p>
+		<p class="white"> alter table 表名 add 字段名 int(4) default '0';</p>
+		<p class="white"> //查找条数</p>
+		<p class="white"> SELECT COUNT(*) FROM table_name</p>
+	</div>
+	<br>
+
+</body>
+</html>

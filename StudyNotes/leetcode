@@ -1,0 +1,6 @@
+3Sum:如果重复数据不跳过的话，会重复输出。while (lo < hi && num[lo] == num[lo+1]) lo++;
+                    			 		 while (lo < hi && num[hi] == num[hi-1]) hi--;
+3Sum Closet: 如果求逼近，定义一个新变量用来存放最为逼近目标的量。
+Letter Combinations of a Phone Number：String+char生成String 队列可以添加"",长度为0.关键是先进先出的终止条件是给定String的长度和.peek().length相同。
+
+Merge k Sorted Lists：特别注意输入为空的状况。
